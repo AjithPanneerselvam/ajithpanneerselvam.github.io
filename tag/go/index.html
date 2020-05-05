@@ -47,12 +47,6 @@
     <link rel="alternate" type="application/rss+xml" title="Ajith Panneerselvam" href="https://ajithpanneerselvam.github.io/rss/" />
 
 	<style>
-		@media all and (max-width: 480px) {
-			.hide {
-				display: none;
-			}
-		}
-
 		.profile-img {
 			display: block;
 			width: 100px;
@@ -60,38 +54,26 @@
 			border-radius: 50%;
 		}
 
-		.profile-img:hover {
+		@media (max-width: 629px) {
+			.profile-img {
+				display: none;
+			}
+		}
+
+		.social-link {
 			display: block;
-			width: 100px;
-			height: 100px;
-			border-radius: 50%;
-			background-color: rgba(200, 100, 0, .5); // Tint color
-			background-blend-mode: multiply;
 		}
 
-		tint {
-			position: relative;
-			float: left;
-			margin-right: 20px;
-			margin-bottom: 20px;
-			cursor: pointer;
-			box-shadow: rgba(0, 0, 0, .2) 3px 5px 5px;
+		@media (min-width: 600px) {
+			.social-link {
+				display: none;
+			}
 		}
 
-		.tint:before {
-			content: "";
-			display: block;
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			background: rgba(0, 255, 255, 0.5);
-			transition: all .3s linear;
-		}
-
-		.tint:hover:before {
-			background: none;
+		ul#social li {
+			display: inline;
+			list-style-type: none;
+			padding-inline-end: 40px;
 		}
 	</style>
 
@@ -99,7 +81,7 @@
 
 <body class="tag-template tag-go">
 
-	<svg width="0" height="0" class="hidden">
+	<svg width="0" height="0" class="">
 		<symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="github">
 			<title>GitHub icon</title>
 			<path
@@ -108,7 +90,7 @@
 		</symbol>
 	</svg>
 
-	<svg width="0" height="0" class="hidden">
+	<svg width="0" height="0" class="">
 		<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="linkedin">
 			<path
 				d="M21.8 0H2.2C1 0 0 1 0 2.2v19.6C0 23 1 24 2.2 24h19.6c1.2 0 2.2-1 2.2-2.2V2.2C24 1 23 0 21.8 0zM7 20H3V9h4zM5 7.7c-1.2 0-2-.802-2-1.802C3 4.801 3.8 4 5 4s2 .8 2 1.8c0 1.098-.8 1.9-2 1.9zM21 20h-4v-6c0-1.602-1.102-2-1.398-2C15.3 12 14 12.2 14 14v6h-4V9h4v1.602C14.602 9.699 15.602 9 17.5 9s3.5 1.5 3.5 5z">
@@ -116,7 +98,7 @@
 		</symbol>
 	</svg>
 
-	<svg width="0" height="0" class="hidden">
+	<svg width="0" height="0" class="">
 		<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="twitter">
 			<path
 				d="M24 4.3c-.898.4-1.8.7-2.8.802 1-.602 1.8-1.602 2.198-2.704-1 .602-2 1-3.097 1.204C19.3 2.602 18 2 16.6 2a4.907 4.907 0 0 0-4.9 4.898c0 .403 0 .801.102 1.102C7.7 7.8 4.102 5.898 1.7 2.898c-.5.704-.7 1.602-.7 2.5 0 1.704.898 3.204 2.2 4.102-.802-.102-1.598-.3-2.2-.602V9c0 2.398 1.7 4.398 3.898 4.8-.398.098-.796.2-1.296.2-.301 0-.602 0-.903-.102.602 2 2.403 3.403 4.602 3.403-1.7 1.3-3.801 2.097-6.102 2.097-.398 0-.8 0-1.199-.097C2.2 20.699 4.8 21.5 7.5 21.5c9.102 0 14-7.5 14-14v-.602c1-.699 1.8-1.597 2.5-2.597">
@@ -145,7 +127,8 @@
 					</a>
 				</li>
 
-				<li class="nav-"><a title="LinkedIn" href="https://www.linkedin.com/in/ajithpanneerselvam/" target="_blank">
+				<li class="nav-"><a title="LinkedIn" href="https://www.linkedin.com/in/ajithpanneerselvam/"
+						target="_blank">
 						<svg width="16" height="16" role="img" class="icon">
 							<use xlink:href="#linkedin"></use>
 						</svg>
@@ -172,8 +155,8 @@
 			</div>
 		</div>
 
-		<div class="hide" style="display: flex; justify-content: center; align-items: center;">
-			<img src="../../content/images/aji.jpg" alt="" style="" class="profile-img hide">
+		<div style="display: flex; justify-content: center; align-items: center;">
+			<img class="profile-img" src="../../content/images/aji.jpg">
 		</div>
 
 	</div>
@@ -273,14 +256,5 @@
 	
 
 </body>
-
-<style>
-	.profile-img {
-		display: block;
-		width: 100px;
-		height: 100px;
-		border-radius: 50%;
-	}
-</style>
 
 </html>
