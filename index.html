@@ -63,14 +63,17 @@
 			}
 		}
 
-		.social-link {
+		.hide-social-link {
+			display: inline;
 		}
 
 		@media (min-width: 600px) {
-			.social-link {
+			.hide-social-link {
 				display: none;
 			}
 		}
+
+		#social-link{}
 
 		ul#social-link li {
 			display: inline;
@@ -178,8 +181,8 @@
 
 			<h1 class="blog-name">Ajith Panneerselvam</h1>
 
-			<div style="padding-top:1em" class="text-align">
-				<ul id="social-link">
+			<div id="" style="padding-top:2em" class="text-align">
+				<ul id="social-link" class="hide-social-link">
 					<li class=""><a class = "remove-underscore"title="GitHub" href="https://github.com/AjithPanneerselvam" target="_blank">
 							<svg width="16" height="16" role="img" class="icon">
 								<use xlink:href="#github"></use>
