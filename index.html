@@ -10,7 +10,7 @@
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css?v=be7f910745" />
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css?v=fb08d91aee" />
 
 	<meta name="description" content="Anything on Distributed Systems, Systems Programming, Algorithms, and Computer Hardware interests me." />
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
@@ -73,7 +73,7 @@
 			}
 		}
 
-		#social-link{}
+		#social-link {}
 
 		ul#social-link li {
 			display: inline;
@@ -123,8 +123,8 @@
 			</span>
 
 			<ul role="navigation" aria-label="Navigation">
-		<li class="nav-ajith-panneerselvam active" role="presentation"><a href="index.html"><span>Ajith Panneerselvam</span></a></li>
-		<li class="nav-about-me" role="presentation"><a href="about/index.html"><span>About Me</span></a></li>
+		<li class="nav-ajiths-blog active" role="presentation"><a href="index.html"><span>Ajith&#x27;s Blog</span></a></li>
+		<li class="nav-about" role="presentation"><a href="about/index.html"><span>About</span></a></li>
 </ul>
 
 
@@ -178,20 +178,38 @@
 	<div class="inner">
 		<div class="box blog-box">
 
+			<style type="text/css">
+				.mobileShow {
+					display: none;
+				}
 
-			<h1 class="blog-name">Ajith Panneerselvam</h1>
+				/* Smartphone Portrait and Landscape */
+				@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+					.mobileShow {
+						display: inline;
+					}
+				}
+			</style>
+
+
+			<h1 class="blog-name mobileShow">Ajith Panneerselvam</h1>
+
+			<div style="padding-top:0.1em"></div>
+			<span class="blog-description">Anything on Distributed Systems, Systems Programming, Algorithms, and Computer Hardware interests me. </span>
+
 
 			<div id="" style="padding-top:2em" class="text-align">
 				<ul id="social-link" class="hide-social-link">
-					<li class=""><a class = "remove-underscore"title="GitHub" href="https://github.com/AjithPanneerselvam" target="_blank">
+					<li class=""><a class="remove-underscore" title="GitHub"
+							href="https://github.com/AjithPanneerselvam" target="_blank">
 							<svg width="16" height="16" role="img" class="icon">
 								<use xlink:href="#github"></use>
 							</svg>
 						</a>
 					</li>
 
-					<li class=""><a class = "remove-underscore" title="LinkedIn" href="https://www.linkedin.com/in/ajithpanneerselvam/"
-							target="_blank">
+					<li class=""><a class="remove-underscore" title="LinkedIn"
+							href="https://www.linkedin.com/in/ajithpanneerselvam/" target="_blank">
 							<svg width="16" height="16" role="img" class="icon">
 								<use xlink:href="#linkedin"></use>
 							</svg>
@@ -199,7 +217,8 @@
 					</li>
 
 
-					<li class=""><a class="remove-underscore" title="Twitter" href="https://twitter.com/dprofessor_1618" target="_blank">
+					<li class=""><a class="remove-underscore" title="Twitter" href="https://twitter.com/dprofessor_1618"
+							target="_blank">
 							<svg width="16" height="16" role="img" class="icon">
 								<use xlink:href="#twitter"></use>
 							</svg>
@@ -209,9 +228,6 @@
 
 			</div>
 
-			<div style="padding-top:1em"></div>
-			<span class="blog-description">Anything on Distributed Systems, Systems Programming, Algorithms, and Computer Hardware interests me. </span>
-
 			<!--<p class="tech-description" style="text-align:center">
 				Go <span>&#183;</span>
 				C++ <span>&#183;</span>
@@ -219,9 +235,9 @@
 				Python
 			</p>-->
 
-			<div style="padding-top:2em"></div>
+			<!--	<div style="padding-top:2em"></div>
 
-			<h1 class="post-title tech-description" style="text-align:center">Blogs</h1>
+			<h1 class="post-title tech-description" style="text-align:center">Blogs</h1> -->
 
 	</div>
 
@@ -320,14 +336,15 @@
 
 
 		<div class="nav-footer">
-			<nav class="nav-wrapper">
-				<span class="nav-copy" style="text-align:center;">Ajith Panneerselvam &copy; 2020</span>
+			<nav class="nav-wrapper" aria-label="Footer">
+				<span class="nav-copy">Ajith Panneerselvam &copy; 2020</span>
+				<span class="nav-credits">Published with <a href="https://ghost.org">Ghost</a> &bull; Theme <a href="https://github.com/zutrinken/attila">Attila</a></span>
 			</nav>
 		</div>
 
 	</section>
 
-	<script type="text/javascript" src="assets/js/script.js?v=be7f910745"></script>
+	<script type="text/javascript" src="assets/js/script.js?v=fb08d91aee"></script>
 
 	
 
