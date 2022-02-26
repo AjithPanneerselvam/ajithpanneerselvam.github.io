@@ -19,15 +19,15 @@
     <meta property="og:site_name" content="Ajith&#x27;s web logs" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Operating System Series - Process (Part I)" />
-    <meta property="og:description" content="This is the first blog post in the OS series. Without much thought, I decided to write about process, as it&#x27;s the fundamental concept around which the other elements of OS are built. Without any further introduction, let&#x27;s dive in. What is a Process?First, let me provide a theoretical" />
+    <meta property="og:description" content="This is the first blog post in the OS series. Without much thought, I decided to write about process, as it&#x27;s the fundamental concept around which the other elements of OS are built. ProcessFirst, let me provide a theoretical definition of &quot;process&quot; followed by practical illustrations. A process is a" />
     <meta property="og:url" content="https://ajithpanneerselvam.github.io/operating-system-series-process-part-i/" />
     <meta property="article:published_time" content="2020-05-30T12:38:00.000Z" />
-    <meta property="article:modified_time" content="2022-02-26T14:19:23.000Z" />
+    <meta property="article:modified_time" content="2022-02-26T14:23:25.000Z" />
     <meta property="article:tag" content="Operating System" />
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Operating System Series - Process (Part I)" />
-    <meta name="twitter:description" content="This is the first blog post in the OS series. Without much thought, I decided to write about process, as it&#x27;s the fundamental concept around which the other elements of OS are built. Without any further introduction, let&#x27;s dive in. What is a Process?First, let me provide a theoretical" />
+    <meta name="twitter:description" content="This is the first blog post in the OS series. Without much thought, I decided to write about process, as it&#x27;s the fundamental concept around which the other elements of OS are built. ProcessFirst, let me provide a theoretical definition of &quot;process&quot; followed by practical illustrations. A process is a" />
     <meta name="twitter:url" content="https://ajithpanneerselvam.github.io/operating-system-series-process-part-i/" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Ajith" />
@@ -58,9 +58,9 @@
     "headline": "Operating System Series - Process (Part I)",
     "url": "https://ajithpanneerselvam.github.io/operating-system-series-process-part-i/",
     "datePublished": "2020-05-30T12:38:00.000Z",
-    "dateModified": "2022-02-26T14:19:23.000Z",
+    "dateModified": "2022-02-26T14:23:25.000Z",
     "keywords": "Operating System",
-    "description": "This is the first blog post in the OS series. Without much thought, I decided to\nwrite about process, as it&#x27;s the fundamental concept around which the other\nelements of OS are built.\n\nWithout any further introduction, let&#x27;s dive in.\n\nWhat is a Process?\nFirst, let me provide a theoretical definition of &quot;process&quot; followed by\npractical illustrations. A process is a running instance of a program/code.\nSeveral processes can run in the same program, but each process has its own\nstate. For example, you",
+    "description": "This is the first blog post in the OS series. Without much thought, I decided to\nwrite about process, as it&#x27;s the fundamental concept around which the other\nelements of OS are built.\n\nProcess\nFirst, let me provide a theoretical definition of &quot;process&quot; followed by\npractical illustrations. A process is a running instance of a program/code.\nSeveral processes can run in the same program, but each process has its own\nstate. For example, you can open multiple instances of some applications like\nFirefo",
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://ajithpanneerselvam.github.io/"
@@ -293,7 +293,7 @@
 		<div class="inner">
 
 			<section class="post-content">
-				<p>This is the first blog post in the OS series. Without much thought, I decided to write about<strong> process</strong>, as it's the fundamental concept around which the other elements of OS are built.</p><p>Without any further introduction, let's dive in.</p><h3 id="what-is-a-process">What is a Process?</h3><p>First, let me provide a theoretical definition of "process" followed by practical illustrations. A process is a running instance of a program/code. Several processes can run in the same program, but each process has its own state. For example, you can open multiple instances of some applications like Firefox, Microsoft Word, etc. Each one maintains its own process state. A process executes the instructions sequentially (one at a time).</p><p>Let's see how the execution of a program looks in the memory with the following sample program.</p><figure class="kg-card kg-code-card"><pre><code class="language-c++">void foo(int f) {
+				<p>This is the first blog post in the OS series. Without much thought, I decided to write about<strong> process</strong>, as it's the fundamental concept around which the other elements of OS are built.</p><h3 id="process">Process</h3><p>First, let me provide a theoretical definition of "process" followed by practical illustrations. A process is a running instance of a program/code. Several processes can run in the same program, but each process has its own state. For example, you can open multiple instances of some applications like Firefox, Microsoft Word, etc. Each one maintains its own process state. A process executes the instructions sequentially (one at a time).</p><p>Let's see how the execution of a program looks in the memory with the following sample program.</p><figure class="kg-card kg-code-card"><pre><code class="language-c++">void foo(int f) {
 	cout&lt;&lt;"I'm foo and my value is "&lt;&lt; f; 
 }
 
