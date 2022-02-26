@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <title>WebAssembly, the answer for the Modern Web Performance</title>
+
+    <link rel="canonical" href="http://localhost:2368/webassembly-the-answer-for-the-modern-web-performance/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <meta property="og:site_name" content="Ajith&#x27;s web logs" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="WebAssembly, the answer for the Modern Web Performance" />
+    <meta property="og:description" content="This blog was originally published in the Toyota Connected Engineering blogs. Image Credit: https://github.com/carlosbaraza/web-assembly-logo/tree/master/dist/logoThe Web has evolved so much since its inception, but a few things didn’t change much — JavaScript. In a rapidly changing Web landscape, JavaScript has been the only" />
+    <meta property="og:url" content="http://localhost:2368/webassembly-the-answer-for-the-modern-web-performance/" />
+    <meta property="article:published_time" content="2021-10-21T18:30:00.000Z" />
+    <meta property="article:modified_time" content="2022-02-25T19:25:00.000Z" />
+    <meta property="article:tag" content="WebAssembly" />
+    <meta property="article:tag" content="WASM" />
+    <meta property="article:tag" content="Rust" />
+    <meta property="article:tag" content="Web Browser" />
+    <meta property="article:tag" content="JavaScript" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="WebAssembly, the answer for the Modern Web Performance" />
+    <meta name="twitter:description" content="This blog was originally published in the Toyota Connected Engineering blogs. Image Credit: https://github.com/carlosbaraza/web-assembly-logo/tree/master/dist/logoThe Web has evolved so much since its inception, but a few things didn’t change much — JavaScript. In a rapidly changing Web landscape, JavaScript has been the only" />
+    <meta name="twitter:url" content="http://localhost:2368/webassembly-the-answer-for-the-modern-web-performance/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Ajith" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="WebAssembly, WASM, Rust, Web Browser, JavaScript" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Ajith&#x27;s web logs",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/favicon.ico",
+            "width": 48,
+            "height": 48
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Ajith",
+        "url": "http://localhost:2368/author/ajith/",
+        "sameAs": []
+    },
+    "headline": "WebAssembly, the answer for the Modern Web Performance",
+    "url": "http://localhost:2368/webassembly-the-answer-for-the-modern-web-performance/",
+    "datePublished": "2021-10-21T18:30:00.000Z",
+    "dateModified": "2022-02-25T19:25:00.000Z",
+    "keywords": "WebAssembly, WASM, Rust, Web Browser, JavaScript",
+    "description": "This blog was originally published in the Toyota Connected Engineering blogs\n[https://medium.com/toyota-connected-india/webassembly-the-answer-for-the-modern-web-performance-c3ab3d1664b5]\n.\n\nImage Credit: \nhttps://github.com/carlosbaraza/web-assembly-logo/tree/master/dist/logoThe Web\nhas evolved so much since its inception, but a few things didn’t change much —\nJavaScript. In a rapidly changing Web landscape, JavaScript has been the only\nlanguage that ruled the Browser ecosystem for over a quart",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:2368/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 4.36" />
+    <link rel="alternate" type="application/rss+xml" title="Ajith&#x27;s web logs" href="http://localhost:2368/rss/" />
+
+    <style amp-custom>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        font-size: 62.5%;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        color: #3a4145;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.7rem;
+        line-height: 1.55em;
+        font-weight: 400;
+        font-style: normal;
+        background: #fff;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    p,
+    ul,
+    ol,
+    li,
+    dl,
+    dd,
+    hr,
+    pre,
+    form,
+    table,
+    video,
+    figure,
+    figcaption,
+    blockquote {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul[class],
+    ol[class] {
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    input,
+    button,
+    select,
+    textarea {
+        font: inherit;
+        -webkit-appearance: none;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    label {
+        display: block;
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+
+    hr {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid currentcolor;
+        opacity: 0.1;
+    }
+
+    ::selection {
+        text-shadow: none;
+        background: #cbeafb;
+    }
+
+    mark {
+        background-color: #fdffb6;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    sub,
+    sup {
+        position: relative;
+        font-size: 75%;
+        line-height: 0;
+        vertical-align: baseline;
+    }
+    sup {
+        top: -0.5em;
+    }
+    sub {
+        bottom: -0.25em;
+    }
+
+    ul li + li {
+        margin-top: 0.6em;
+    }
+
+    a {
+        color: var(--ghost-accent-color, #1292EE);
+        text-decoration-skip-ink: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+        font-weight: 700;
+        color: #121212;
+        line-height: 1.4em;
+    }
+
+    h1 {
+        font-size: 3.4rem;
+        line-height: 1.1em;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+        line-height: 1.2em;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.7rem;
+    }
+
+    h5 {
+        font-size: 1.6rem;
+    }
+
+    h6 {
+        font-size: 1.6rem;
+    }
+
+    amp-img {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    amp-img img {
+        object-fit: cover;
+    }
+
+    .page-header {
+        padding: 50px 5vmin 30px;
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .page-header a {
+        color: #121212;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.6rem;
+        letter-spacing: -0.1px;
+    }
+
+    .post {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin: 0 5vmin 5vmin;
+        text-align: center;
+    }
+
+    .post-meta {
+        margin: 1rem 0 0 0;
+        text-transform: uppercase;
+        color: #738a94;
+        font-weight: 500;
+        font-size: 1.3rem;
+    }
+
+    .post-image {
+        margin: 0 0 5vmin;
+    }
+
+    .post-image img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-content {
+        padding: 0 5vmin;
+    }
+
+    .post-content > * + * {
+        margin-top: 1.5em;
+    }
+
+    .post-content [id]:not(:first-child) {
+        margin: 2em 0 0;
+    }
+
+    .post-content > [id] + * {
+        margin-top: 1rem;
+    }
+
+    .post-content [id] + .kg-card,
+    .post-content blockquote + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content > ul,
+    .post-content > ol,
+    .post-content > dl {
+        padding-left: 1.9em;
+    }
+
+    .post-content hr {
+        margin-top: 40px;
+    }
+
+    .post .post-content hr + * {
+        margin-top: 40px;
+    }
+
+    .post-content amp-img {
+        background-color: #f8f8f8;
+    }
+
+    .post-content blockquote {
+        position: relative;
+        font-style: italic;
+    }
+
+    .post-content blockquote::before {
+        content: "";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        bottom: 0;
+        width: 0.3rem;
+        background: var(--ghost-accent-color, #1292EE);
+    }
+
+    .post-content blockquote.kg-blockquote-alt {
+        font-size: 1.2em;
+        font-style: italic;
+        line-height: 1.6em;
+        text-align: center;
+        color: #738a94;
+        padding: 0.75em 3em 1.25em;
+    }
+
+    .post-content blockquote.kg-blockquote-alt::before {
+        display: none;
+    }
+
+    .post-content :not(.kg-card):not([id]) + .kg-card {
+        margin-top: 40px;
+    }
+
+    .post-content .kg-card + :not(.kg-card) {
+        margin-top: 40px;
+    }
+
+    .kg-card figcaption {
+        padding: 1.5rem 1.5rem 0;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.4em;
+        opacity: 0.6;
+    }
+
+    .kg-card figcaption strong {
+        color: rgba(0,0,0,0.8);
+    }
+
+    .post-content :not(pre) code {
+        vertical-align: middle;
+        padding: 0.15em 0.4em 0.15em;
+        border: #e1eaef 1px solid;
+        font-weight: 400;
+        font-size: 0.9em;
+        line-height: 1em;
+        color: #15171a;
+        background: #f0f6f9;
+        border-radius: 0.25em;
+    }
+
+    .post-content > pre {
+        overflow: scroll;
+        padding: 16px 20px;
+        color: #fff;
+        background: #1F2428;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px -2px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4);
+    }
+
+    .kg-embed-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .kg-image-card img {
+        margin: auto;
+    }
+
+    .kg-gallery-card + .kg-gallery-card {
+        margin-top: 0.75em;
+    }
+
+    .kg-gallery-container {
+        position: relative;
+    }
+
+    .kg-gallery-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .kg-gallery-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .kg-gallery-row:not(:first-of-type) {
+        margin: 0.75em 0 0 0;
+    }
+
+    .kg-gallery-image:not(:first-of-type) {
+        margin: 0 0 0 0.75em;
+    }
+
+    .kg-bookmark-card,
+    .kg-bookmark-publisher {
+        position: relative;
+    }
+
+    .kg-bookmark-container,
+    .kg-bookmark-container:hover {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        color: currentColor;
+        background: rgba(255,255,255,0.6);
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        text-decoration: none;
+        border-radius: 3px;
+        box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+    }
+
+    .kg-bookmark-content {
+        flex-basis: 0;
+        flex-grow: 999;
+        padding: 20px;
+        order: 1;
+    }
+
+    .kg-bookmark-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.3em;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        max-height: 45px;
+        margin: 0.5em 0 0 0;
+        font-size: 1.4rem;
+        line-height: 1.55em;
+        overflow: hidden;
+        opacity: 0.8;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .kg-bookmark-metadata {
+        margin-top: 20px;
+    }
+
+    .kg-bookmark-metadata {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 1.3rem;
+        line-height: 1.3em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kg-bookmark-description {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-metadata amp-img {
+        width: 18px;
+        height: 18px;
+        max-width: 18px;
+        max-height: 18px;
+        margin-right: 10px;
+    }
+
+    .kg-bookmark-thumbnail {
+        display: flex;
+        flex-basis: 20rem;
+        flex-grow: 1;
+        justify-content: flex-end;
+    }
+
+    .kg-bookmark-thumbnail amp-img {
+        max-height: 200px;
+    }
+
+    .kg-bookmark-author {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .kg-bookmark-publisher::before {
+        content: "•";
+        margin: 0 .5em;
+    }
+
+    .kg-toggle-card-icon {
+        display: none;
+    }
+
+    .kg-toggle-content {
+        margin-top: 0.8rem;
+    }
+
+    .kg-product-card-container {
+        background: transparent;
+        padding: 20px;
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 1px rgb(124 139 154 / 25%);
+    }
+
+    .kg-product-card-description p {
+        margin-top: 1.5em;
+    }
+
+    .kg-product-card-description ul {
+        margin-left: 24px;
+    }
+
+    .kg-product-card-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+    }
+
+    .kg-product-card-rating-star {
+        height: 28px;
+        width: 20px;
+        margin-right: 2px;
+    }
+
+    .kg-product-card-rating-star svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    opacity: 0.15;
+    }
+
+    .kg-product-card-rating-active.kg-product-card-rating-star svg {
+    opacity: 1;
+    }
+
+    .kg-nft-card-container {
+        position: relative;
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        text-decoration: none;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        box-shadow: 0 2px 6px -2px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 40%);
+        width: 100%;
+        max-width: 512px;
+        color: #15212A;
+        background: #fff;
+        border-radius: 5px;
+        transition: none;
+        margin: 0 auto;
+    }
+
+    .kg-nft-metadata {
+        padding: 2.0rem;
+    }
+
+    .kg-nft-image-container {
+        position: relative;
+    }
+
+    .kg-nft-image {
+        display: flex;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .kg-nft-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .kg-nft-header h4.kg-nft-title {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin: 0;
+        color: #15212A;
+    }
+
+    .kg-nft-header amp-img {
+        max-width: 114px;
+        max-height: 26px;
+    }
+
+    .kg-nft-opensea-logo {
+        margin-top: 2px;
+        width: 100px;
+    }
+
+    .kg-nft-creator {
+        font-family: inherit;
+        color: #95A1AD;
+    }
+
+    .kg-nft-creator span {
+        font-weight: 500;
+        color: #15212A;
+    }
+
+    .kg-nft-card p.kg-nft-description {
+        font-size: 1.4rem;
+        line-height: 1.4em;
+        margin: 2.0rem 0 0;
+        color: #222;
+    }
+
+    .kg-button-card {
+        display: flex;
+        position: static;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kg-btn {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 2.0rem;
+        height: 4.0rem;
+        line-height: 4.0rem;
+        font-size: 1.65rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .kg-btn:hover {
+        opacity: 0.85;
+    }
+
+    .kg-btn-accent {
+        background-color: var(--ghost-accent-color, #1292EE);
+        color: #fff;
+    }
+
+    .kg-callout-card {
+        display: flex;
+        padding: 20px 28px;
+        border-radius: 3px;
+    }
+
+    .kg-callout-card-grey {
+        background: rgba(124, 139, 154, 0.13);
+    }
+
+    .kg-callout-card-white {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-callout-card-blue {
+        background: rgba(33, 172, 232, 0.12);
+    }
+
+    .kg-callout-card-green {
+        background: rgba(52, 183, 67, 0.12);
+    }
+
+    .kg-callout-card-yellow {
+        background: rgba(240, 165, 15, 0.13);
+    }
+
+    .kg-callout-card-red {
+        background: rgba(209, 46, 46, 0.11);
+    }
+
+    .kg-callout-card-pink {
+        background: rgba(225, 71, 174, 0.11);
+    }
+
+    .kg-callout-card-purple {
+        background: rgba(135, 85, 236, 0.12);
+    }
+
+    .kg-callout-card-accent {
+        background: var(--ghost-accent-color);
+        color: #fff;
+    }
+
+    .kg-callout-card-accent a {
+        color: #fff;
+    }
+
+    .kg-callout-emoji {
+        padding-right: 16px;
+        line-height: 1.3;
+        font-size: 1.25em;
+    }
+
+    .kg-header-card {
+        padding: 6em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .kg-header-card.kg-size-small {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+
+    .kg-header-card.kg-size-large {
+        padding-top: 12em;
+        padding-bottom: 12em;
+    }
+
+    .kg-header-card.kg-width-full {
+        padding-left: 4em;
+        padding-right: 4em;
+    }
+
+    .kg-header-card.kg-align-left {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .kg-header-card.kg-style-dark {
+        background: #15171a;
+        color: #ffffff;
+    }
+
+    .kg-header-card.kg-style-light {
+        color: #15171a;
+        border: 1px solid rgba(124, 139, 154, 0.25);
+        border-width: 1px 0;
+    }
+
+    .kg-header-card.kg-style-accent {
+        background-color: var(--ghost-accent-color);
+    }
+
+    .kg-header-card.kg-style-image {
+        background-color: #e7e7eb;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .kg-header-card h2 {
+        font-size: 4em;
+        font-weight: 700;
+        line-height: 1.1em;
+        margin: 0;
+    }
+
+    .kg-header-card h2 strong {
+        font-weight: 800;
+    }
+
+    .kg-header-card.kg-size-small h2 {
+        font-size: 3em;
+    }
+
+    .kg-header-card.kg-size-large h2 {
+        font-size: 5em;
+    }
+
+    .kg-header-card h3 {
+        font-size: 1.25em;
+        font-weight: 500;
+        line-height: 1.3em;
+        margin: 0;
+    }
+
+    .kg-header-card h3 strong {
+        font-weight: 600;
+    }
+
+    .kg-header-card.kg-size-small h3 {
+        font-size: 1em;
+    }
+
+    .kg-header-card.kg-size-large h3 {
+        font-size: 1.5em;
+    }
+
+    .kg-header-card:not(.kg-style-light) h2,
+    .kg-header-card:not(.kg-style-light) h3 {
+        color: #ffffff;
+    }
+
+    .kg-header-card a.kg-header-card-button {
+        display: flex;
+        position: static;
+        align-items: center;
+        padding: 0 1.2em;
+        height: 2.4em;
+        line-height: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 0.95em;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: opacity 0.2s ease-in-out;
+        background-color: var(--ghost-accent-color);
+        color: #ffffff;
+        margin: 1.75em 0 0;
+    }
+
+    .kg-header-card a.kg-header-card-button:hover {
+        opacity: 0.85;
+    }
+
+    .kg-header-card.kg-size-large a.kg-header-card-button {
+        margin-top: 2em;
+    }
+
+    .kg-header-card.kg-size-small a.kg-header-card-button {
+        margin-top: 1.5em;
+    }
+
+    .kg-header-card.kg-style-image a.kg-header-card-button,
+    .kg-header-card.kg-style-dark a.kg-header-card-button {
+        background: #ffffff;
+        color: #15171a;
+    }
+
+    .kg-header-card.kg-style-accent a.kg-header-card-button {
+        background: #ffffff;
+        color: var(--ghost-accent-color);
+    }
+
+    .kg-audio-card {
+        display: flex;
+        width: 100%;
+        box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    }
+
+    .kg-audio-thumbnail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        background: transparent;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .kg-audio-thumbnail.placeholder {
+        background: var(--ghost-accent-color);
+    }
+
+    .kg-audio-thumbnail.placeholder svg {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }
+
+    .kg-audio-player-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        --seek-before-width: 0%;
+        --volume-before-width: 100%;
+        --buffered-width: 0%;
+    }
+
+    .kg-audio-title {
+        width: 100%;
+        padding: 8px 12px 0;
+        border: none;
+        font-family: inherit;
+        font-size: 1.1em;
+        font-weight: 700;
+        background: transparent;
+    }
+
+    .kg-audio-player {
+        display: none;
+    }
+
+    .kg-width-full.kg-card-hascaption {
+        display: grid;
+        grid-template-columns: inherit;
+    }
+
+    .post-content table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .post-content th {
+        padding: 0.5em 0.8em;
+        text-align: left;
+        font-size: .75em;
+        text-transform: uppercase;
+    }
+
+    .post-content td {
+        padding: 0.4em 0.7em;
+    }
+
+    .post-content tbody tr:nth-child(2n + 1) {
+        background-color: rgba(0,0,0,0.1);
+        padding: 1px;
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td:last-child {
+        box-shadow:
+            inset 1px 0 rgba(0,0,0,0.1),
+            inset -1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:nth-child(2n + 2) td {
+        box-shadow: inset 1px 0 rgba(0,0,0,0.1);
+    }
+
+    .post-content tbody tr:last-child {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+
+    .page-footer {
+        padding: 60px 5vmin;
+        margin: 60px auto 0;
+        text-align: center;
+        background-color: #f8f8f8;
+    }
+
+    .page-footer h3 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    .page-footer p {
+        max-width: 500px;
+        margin: 1rem auto 1.5rem;
+        font-size: 1.7rem;
+        line-height: 1.5em;
+        color: rgba(0,0,0,0.6)
+    }
+
+    .powered {
+        display: inline-flex;
+        align-items: center;
+        margin: 30px 0 0;
+        padding: 6px 9px 6px 6px;
+        border: rgba(0,0,0,0.1) 1px solid;
+        font-size: 12px;
+        line-height: 12px;
+        letter-spacing: -0.2px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+        color: #222;
+        text-decoration: none;
+        background: #fff;
+        border-radius: 6px;
+    }
+
+    .powered svg {
+        height: 16px;
+        width: 16px;
+        margin: 0 6px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            font-size: 1.6rem;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 2.6rem;
+            line-height: 1.15em;
+        }
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2em;
+        }
+        h3 {
+            font-size: 1.7rem;
+        }
+    }
+
+    :root {--ghost-accent-color: #ff1a75;}
+    </style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
+
+</head>
+
+<body class="amp-template">
+    <header class="page-header">
+        <a href="http://localhost:2368">
+                Ajith&#x27;s web logs
+        </a>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">WebAssembly, the answer for the Modern Web Performance</h1>
+                <section class="post-meta">
+                    Ajith -
+                    <time class="post-date" datetime="2021-10-21">21 Oct 2021</time>
+                </section>
+            </header>
+            <section class="post-content">
+
+                <p>This blog was originally published in the <a href="https://medium.com/toyota-connected-india/webassembly-the-answer-for-the-modern-web-performance-c3ab3d1664b5">Toyota Connected Engineering blogs</a>.</p><figure class="kg-card kg-image-card kg-card-hascaption"><figcaption>Image Credit: <a href="https://github.com/carlosbaraza/web-assembly-logo/tree/master/dist/logo" rel="noopener ugc nofollow">https://github.com/carlosbaraza/web-assembly-logo/tree/master/dist/logo</a></figcaption></figure><p>The Web has evolved so much since its inception, but a few things didn’t change much — JavaScript. In a rapidly changing Web landscape, JavaScript has been the only language that ruled the Browser ecosystem for over a quarter-century now. All this speaks for the greatness of JavaScript!</p><p>In recent years, we are pushing the limits of the Web unlike ever before, inviting unconventional web applications built based on Augmented reality (AR), Machine Learning (ML), games demanding intensive graphics, etc. to the web browser. However, JavaScript, the language of the web browser is not meant for building performance-sensitive applications. This is where WebAssembly abbreviated WASM steps into the game, filling the performance void in the web browser.</p><p>WebAssembly has been around there for some time now and it is starting to get serious adoption of late. WebAssembly has found its way beyond web browsers, but we will be talking about <strong>WebAssembly in the scope of the web browser </strong>to keep the article focused.</p><h1 id="understanding-webassembly">Understanding WebAssembly</h1><p>WebAssembly is defined in the <a href="https://webassembly.org/" rel="noopener ugc nofollow">official site </a>as</p><blockquote>WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. WebAssembly is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.</blockquote><p>We will break down the official definition of WebAssembly as we proceed further, but before we delve deeper, let us define it with a simpler language — <em><strong>WebAssembly is a technology that enables you to run code written in programming languages other than JavaScript in the web browser. </strong></em>Keep in mind this is not an official definition, but it fits the bill in the context of the web browser. Now we have a layman-level understanding of what WebAssembly is. Let’s look at the compilation process and the virtual machine to understand more.</p><h2 id="compilation-process">Compilation Process</h2><p>The idea behind WebAssembly is to take a language like C and run it in the web browser. The C compiler would take the source code and produce machine instructions for the target CPU architecture. But this traditional compilation process is not going to work for the web. Web browsers run on a plethora of platforms that you may not even have come across. We don’t know beforehand the underlying CPU architecture where our code is going to run.</p><p>Fortunately, this is not an unprecedented problem in Computer Science. If we look back at the history of Computer Science, it tells us the concept of <strong>Abstraction </strong>has proved to be one of the most powerful mechanisms to reduce platform dependency. WebAssembly does the exact thing — it introduces a layer of abstraction, which allows us to run the code in the browser, independent of the underlying platform.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://miro.medium.com/max/1400/1*Kwmkg4MwwkUaxNX6HJOJeA.png" class="kg-image" alt width="758" height="338" layout="responsive"></amp-img><figcaption>WebAssembly Compilation</figcaption></figure><p>As seen in the above diagram, we compile the high-level source code written in languages like C, C++, and Rust and compile it to the intermediate WebAssembly bytecode. Then the WebAssembly bytecode or binary will be shipped along with other website assets like HTML, CSS, and JavaScript files upon loading the web page in the browser. The newly added capability (WebAssembly runtime) in the web browser will take care of translating the WebAssembly bytecode into machine instructions that the underlying processor speaks.</p><p>To run WebAssembly code in the browser, the browser engine will have to implement the WebAssembly specification like how ECMAScript specification is implemented to run JavaScript code. The following is a super simplified diagram of the browser engine focusing only on the runtime components.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://miro.medium.com/max/1400/1*Ba-V9AWPFXJIwjpjBOnJSA.png" class="kg-image" alt width="816" height="716" layout="responsive"></amp-img><figcaption>JavaScript and WebAssembly Runtime</figcaption></figure><p>Each browser has its own browser engine. Hence it is the independent browser team effort to support WebAssembly. It is wonderful that all the major browsers such as Google Chrome, Mozilla Firefox, Safari, and Microsoft Edge have implemented WebAssembly specifications in their browser engine (including the mobile version). At the time of writing this blog, the browsers that support WebAssembly are shown in the image below.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://miro.medium.com/max/1400/1*T8Ce-oWk6HnvdfB24cyxcg.png" class="kg-image" alt width="910" height="198" layout="responsive"></amp-img><figcaption>Image Credit — <a href="https://caniuse.com/?search=wasm" rel="noopener ugc nofollow">https://caniuse.com/?search=wasm</a></figcaption></figure><p>Okay, enough theory. To get a feel of the WebAssembly bytecode, we are going to use the <a href="https://mbebenita.github.io/WasmExplorer/" rel="noopener ugc nofollow">WebAssembly explorer site </a>to compile a C code to WebAssembly.</p><p>The above code compiled to WebAssembly would look like the bytecode shown below.</p><p>If you haven’t seen assembly instructions before, this is how it looks :) Definitely not pretty!</p><h2 id="virtual-machine">Virtual Machine</h2><p>The core of WebAssembly is Virtual Machine (VM). Based on the way the instructions are executed, the virtual machines can be broadly classified into two variants — register-based and stack-based virtual machines. WebAssembly is a stack-based virtual machine. Stack-based VM executes the instructions using primitive stack operations — push and pop. As a result of the simple execution approach, the stack-based instructions are on an average 25% smaller than the equivalent register-based VM instructions. But the space advantage comes at the cost of performance. Yes, it is a space-time tradeoff!</p><p>The Virtual Machine not just makes WebAssembly platform-independent, but also language-independent. Furthermore, the WebAssembly runtime does not have an automatic garbage collector. As a result, languages that do not need garbage collector like C, C++, and Rust got WebAssembly support earlier than other languages that rely on the garbage collector.</p><p>In the scope of Virtual Machines in the browser, Java Applets could be an interesting comparison. Java Applets were primarily used to add interactive features to web applications, and they did a pretty good job given the maturity of the Web at that time. However, there was one serious issue with Java Applets — the Java bytecode runs on the Java Virtual Machine (JVM) external to the browser’s process memory. This setup prevented Java Applet blend well with the user experience of the web application.</p><p>Operationally, users must maintain two software — browser and JVM to run Applets. This was painful as the users must keep the JVM version compatible with Java Applets running in the browser. Parallelly, JavaScript engines were getting a series of optimizations like Just-In-Time (JIT) compilation and access to hardware-accelerated GPU which closed the performance gap between Java Applets and JavaScript. As the disadvantages of Java Applets outweighed the advantages, browsers deprecated the Java Applet support. Now, Java Applet is part of Web history.</p><p>Thanks to the browsers for baking the WebAssembly runtime as the native component in the browser engine.</p><h1 id="when-to-use-webassembly">When to use WebAssembly?</h1><p>If we understand the areas where WebAssembly shines over JavaScript, we can understand when to use it. You would often find people comparing WebAssembly and JavaScript, including myself in this blog. This may allow you to overlook the fundamental traits of WebAssembly and JavaScript. They both are two different things altogether — WebAssembly is a compilation target, whereas JavaScript is a programming language. Despite their contrasting traits, they both have a role to play in modern web applications. In the following sections, we will understand the role of WebAssembly by focusing on the key dimensions of any performant web application — performance and load time.</p><h2 id="performance">Performance</h2><p>The execution speed is a crucial parameter when we compare JavaScript and WebAssembly. JavaScript is a garbage-collected language. This inherent nature of JavaScript bites us when our web application must perform <strong>CPU-intensive tasks </strong>like audio/video streaming, image rendering, media editing, etc. When we closely look at the mentioned use cases, these are operations proven to be handled effectively by low-level languages such as C, C++, and Rust.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://miro.medium.com/max/1356/1*xaQ05vsI4IF1O69e-9kolQ.png" class="kg-image" alt width="678" height="384" layout="responsive"></amp-img><figcaption>Image Credit: <a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/" rel="noopener ugc nofollow">https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/</a></figcaption></figure><p>In the execution flow of JavaScript, apart from executing the actual instructions, it involves parsing and tokenizing the source code into AST (Abstract Syntax Tree), compiling, optimizing, and garbage collecting. That is a lot of work to be done at runtime! The non-deterministic garbage collection in JavaScript makes the situation worse in performance-sensitive tasks.</p><p>Whereas in WebAssembly, most of the time-consuming execution steps are performed ahead of time at compile time as opposed to what JavaScript does. The decoding and compiling steps in WebAssembly is a lot cheaper because it is already in a language form that is close to what a processor understands. It is evident from the efficient execution pattern, WebAssembly is the answer for the application that craves performance.</p><p>If you are thinking compiling JavaScript to WebAssembly would take the performance gap out of the equation, that is not the case. The current state of WebAssembly runtime only worsens the situation. To compile and run JavaScript as a WebAssembly module, we must compile the whole JavaScript Virtual Machine along with the application code. This takes a huge hit on both the performance and size of the WebAssembly module. This situation may change when the WebAssembly runtime includes garbage collection for languages that rely on it.</p><h2 id="load-time">Load Time</h2><p>The load time of the web page correlates with a good user experience. One factor that influences the load time is the size of the web page assets. The smaller the size of the assets, the quicker the browser downloads and renders them. The size of the WebAssembly module is many times smaller than the equivalent minified JavaScript implementation.</p><p>On top of a smaller WebAssembly module, the streaming compilation feature is an absolute game-changer<em>. </em>Instead of waiting for the whole WebAssembly file to be downloaded, streaming compilation allows the WebAssembly runtime to compile the WebAssembly file in chunks as it downloads them over the network, which reduces the load time multifold.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-anim src="https://miro.medium.com/max/1000/0*mNQTeL__Y0l1R5x8.gif" class="kg-image" alt width="500" height="253" layout="responsive"></amp-anim><figcaption>Image Credit: <a href="https://hacks.mozilla.org/2018/01/making-webassembly-even-faster-firefoxs-new-streaming-and-tiering-compiler/" rel="noopener ugc nofollow">https://hacks.mozilla.org/2018/01/making-webassembly-even-faster-firefoxs-new-streaming-and-tiering-compiler/</a></figcaption></figure><h1 id="webassembly-and-javascript-together">WebAssembly and JavaScript together</h1><p>It is easy to overthink that WebAssembly will be replacing JavaScript given the capabilities of WebAssembly. But JavaScript isn’t going anywhere. Indeed, WebAssembly complements JavaScript and empowers developers to optimize and run CPU and memory-sensitive applications in the web browser. However, WebAssembly kills the monopoly of JavaScript in the browser space for the good, which opens a whole new set of opportunities.</p><p>In all fairness, WebAssembly cannot do everything JavaScript does. WebAssembly module runs in a sandbox environment, which does not have access to Document Object Model (DOM), I/O, etc. Though this may sound restrictive, the strict isolation eliminates the attack surface the malicious code could exploit. If you intend to perform any I/O operations like a file or network I/O, you must achieve it through JavaScript. This reassures that it is not either WebAssembly or JavaScript, but both have a role to play their strengths in the Web.</p><h2 id="communication-between-webassembly-and-javascript">Communication between WebAssembly and JavaScript</h2><p>The communication between JavaScript and WebAssembly can be an independent article on its own. However, to give you a fair idea, let’s talk a little about a key element of the communication between JavaScript and WebAssembly, which is data types.</p><p>WebAssembly has only 4 data types as follows.</p><ul><li>i32: 32-bit integer</li><li>i64: 64-bit integer</li><li>f32: 32-bit floating-point</li><li>f64: 64-bit floating-point</li></ul><p>On the other hand, JavaScript has rich data types like any other high-level language. The disparity between JavaScript and WebAssembly data types leads to questions like, <em>“How can a JavaScript String type be represented in WebAssembly?”</em>. Any JavaScript data type will be translated down to integers and floating points. Likewise, when the call is made into JavaScript from WebAssembly, the WebAssembly data types will be translated into JavaScript types. Apart from JavaScript APIs, browsers provide Web APIs like <code>console.log()</code>, <code>Window.alert()</code>. There is no direct way to call the Web APIs from WebAssembly, it has to go through JavaScript. As the WebAssembly team is working on improving this inefficiency, this situation is likely to change in the future.</p><p>The next logical question would be, <em>“How is the data being passed between JavaScript VM and WebAssembly VM that makes the communication possible?”</em>. They communicate by sharing memory — both the VMs have access to a shared linear array of memory. The image below illustrates the scenario, where the WebAssembly module sends an ASCII encoded <code>Hello</code> message to the JavaScript module by writing it in the shared linear memory. In addition to the message, the WebAssembly module passes the starting address (offset) and the length of the message to the JavaScript module to read the data from the linear memory.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://miro.medium.com/max/1400/1*tZZA79WzoEuIMRQ9MIOZDg.png" class="kg-image" alt width="794" height="634" layout="responsive"></amp-img><figcaption>Image Credit: <a href="https://hacks.mozilla.org/2017/07/memory-in-webassembly-and-why-its-safer-than-you-think/" rel="noopener ugc nofollow">https://hacks.mozilla.org/2017/07/memory-in-webassembly-and-why-its-safer-than-you-think/</a></figcaption></figure><p>Thankfully, developers need not write low-level code to read and write from the linear memory and convert the data types between JavaScript and WebAssembly. Tools <code>emscripten</code> and <code>wasm-bindgen</code> will generate JavaScript glue code facilitating the communication between JavaScript and WebAssembly module.</p><h2 id="javascript-and-rust-generated-webassembly">JavaScript and Rust-generated WebAssembly</h2><p>In this section, let us take a code example to understand how data is transferred between JavaScript and WebAssembly. Rust is the language we will be using to build the WebAssembly module.</p><p>There are a few Rust elements we need to understand in the context of WebAssembly.</p><ol><li><code>wasm_bindgen</code> is a Rust library (crate) and also a Command Line Interface (CLI) tool that facilitates the high-level interaction between JavaScript and Rust-generated WebAssembly module. For example, Rust code can use native <code>&amp;str</code> type instead of a slice of <code>u32</code> to handle JavaScript String type. <code>wasm_bindgen</code> crate allows making calls to all the JavaScript and Web APIs from the Rust code.</li><li>When a public function or <code>extern</code> block is annotated with the attribute <code>#[wasm_bindgen]</code>, it tells the Rust WebAssembly compiler to generate the bindings and JavaScript glue code for the decorated function or a block.</li><li>There are a couple of meanings to the <code>extern</code> keyword in Rust. In the following context, the <code>extern</code> keyword is used to declare Foreign Function Interface (FFI) such that the Rust code can call those foreign functions.</li></ol><p>The following Rust code imports the Web API <code>Window.alert()</code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert" rel="noopener ugc nofollow"> </a>and exports the Rust function <code>greet</code> to JavaScript.</p><p>Note that <code>greet</code> and <code>alert</code> functions accept native Rust type ( <code>&amp;str</code>) as a parameter and not a pointer to the linear memory. Thanks to <code>wasm-bindgen</code> for making this high-level interaction possible.</p><p><code>wasm-pack</code> is a popular tool to build WebAssembly packages written in Rust. <code>wasm-pack</code> internally uses <code>wasm-bindgen</code> to wrap out Rust-generated WebAssembly module by JavaScript wrappers. On building the above Rust code using <code>wasm-pack</code>, it generates the JavaScript wrappers to the WebAssembly module as shown in the image below.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://miro.medium.com/max/1400/1*JYXOcQ3s0xTL5dIL4knrdQ.png" class="kg-image" alt width="896" height="128" layout="responsive"></amp-img><figcaption>JavaScript glue code generated by wasm-pack</figcaption></figure><p>The generated glue code allows the JavaScript application code to call the WebAssembly functions like calling any other JavaScript function. The following JavaScript code uses the generated glue code to call the <code>greet</code> function in the WebAssembly module and passes the argument <code>World!</code> of type string.</p><p>Yay, we have successfully connected all the strings and the output is shown below.</p><figure class="kg-card kg-image-card kg-card-hascaption"><amp-img src="https://miro.medium.com/max/1400/1*l-JS30JniJu9WNPbpGZ67A.png" class="kg-image" alt width="892" height="146" layout="responsive"></amp-img><figcaption>Output</figcaption></figure><p>Let us go through the steps to understand what happens under the hood to achieve the above output.</p><ol><li>The string <code>World!</code> is passed to the JavaScript glue code from the JavaScript application code.</li><li>The JavaScript glue code converts the string into numbers (ASCII code) and writes in the linear memory.</li><li>JavaScript glue code also passes the length and pointer to the start of the message to WebAssembly.</li><li>WebAssembly reads the message (<code>World!</code> in ASCII code) from the linear memory and appends it to the ASCII equivalent of the string <code>Hello,</code> .</li><li>The Web API call <code>Window.alert()</code> from WebAssembly has to go through JavaScript. Hence, the ASCII values of the string <code>Hello, World!</code> are written to the linear memory and the starting address and length are passed to the JavaScript glue code.</li><li>JavaScript reads the message from the linear memory and decodes the ASCII values into JavaScript String.</li><li>JavaScript makes the Web API call <code>Window.alert()</code> and passes the argument <code>Hello, World!</code>.</li></ol><p>It is amazing to witness how well all the underlying complexities are abstracted away from the application code.</p><h2 id="some-inspirational-works-using-webassembly">Some inspirational works using WebAssembly</h2><ul><li><a href="https://www.wasm.com.cn/demo/Tanks/" rel="noopener ugc nofollow">Tanks game</a> by Unity.</li><li><a href="https://blogs.autodesk.com/autocad/autocad-web-app-google-io-2018/" rel="noopener ugc nofollow">AutoCAD Web Application</a>.</li><li><a href="https://medium.com/google-earth/google-earth-comes-to-more-browsers-thanks-to-webassembly-1877d95810d6" rel="noopener">Google Earth</a> (WebAssembly made it possible for Google Earth to be available in all major browsers!!!).</li></ul><h2 id="resources">Resources</h2><p>There are tons of resources on the Internet that talk about WebAssembly in great breadth and depth. Some of the resources that I found useful are listed below.</p><ul><li><a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/" rel="noopener ugc nofollow">A cartoon intro to WebAssembly</a>, Lin Clark.</li><li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts" rel="noopener ugc nofollow">https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts</a></li><li><a href="https://2ality.com/2015/06/web-assembly.html" rel="noopener ugc nofollow">WebAssembly: a binary format for the web</a>, Axel Rauschmayer.</li><li><a href="https://rustwasm.github.io/wasm-bindgen/" rel="noopener ugc nofollow">wasm-bindgen Guide</a>.</li><li><a href="https://hacks.mozilla.org/2018/01/making-webassembly-even-faster-firefoxs-new-streaming-and-tiering-compiler/" rel="noopener ugc nofollow">Making WebAssembly even faster: Firefox’s new streaming and tiering compiler</a>, Lin Clark.</li><li><a href="https://youtu.be/njt-Qzw0mVY" rel="noopener ugc nofollow">WebAssembly for Web Developers (Google I/O ’19)</a></li><li><a href="https://people.mpi-sws.org/~rossberg/papers/Haas,%20Rossberg,%20Schuff,%20Titzer,%20Gohman,%20Wagner,%20Zakai,%20Bastien,%20Holman%20-%20Bringing%20the%20Web%20up%20to%20Speed%20with%20WebAssembly.pdf" rel="noopener ugc nofollow">Bringing the Web up to Speed with WebAssembly</a></li></ul>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="page-footer">
+        <h3>Ajith&#x27;s web logs</h3>
+            <p>I use this space to log my learnings and occasionally write in-depth articles on Rust, Distributed Systems, and Software Engineering in general.</p>
+        <p><a href="http://localhost:2368">Read more posts →</a></p>
+        <a class="powered" href="https://ghost.org" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156"><g fill="none" fill-rule="evenodd"><rect fill="#15212B" width="156" height="156" rx="27"/><g transform="translate(36 36)" fill="#F6F8FA"><path d="M0 71.007A4.004 4.004 0 014 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0130 84H4a4 4 0 01-4-4.007v-8.986zM50 71.007A4.004 4.004 0 0154 67h26a4 4 0 014 4.007v8.986A4.004 4.004 0 0180 84H54a4 4 0 01-4-4.007v-8.986z"/><rect y="34" width="84" height="17" rx="4"/><path d="M0 4.007A4.007 4.007 0 014.007 0h41.986A4.003 4.003 0 0150 4.007v8.986A4.007 4.007 0 0145.993 17H4.007A4.003 4.003 0 010 12.993V4.007z"/><rect x="67" width="17" height="17" rx="4"/></g></g></svg> Published with Ghost</a>
+    </footer>
+    
+</body>
+</html>
