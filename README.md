@@ -1,2 +1,4 @@
 # My blogging site 
-**Note**: Don't touch the CNAME. But if you messed it up, just add ajith.io when you recreate it.
+
+1. Once the static files are copied in this repo, run `./run.sh` to replace http://0.0.0.0:2368 with https://ajith.io
+2. Push the changes to be deployed.
