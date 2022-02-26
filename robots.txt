@@ -1,5 +1,5 @@
 User-agent: *
-Sitemap: https://ajithpanneerselvam.github.io/sitemap.xml
+Sitemap: http://0.0.0.0:2368/sitemap.xml
 Disallow: /ghost/
 Disallow: /p/
 Disallow: /email/
