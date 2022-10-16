@@ -10,7 +10,7 @@
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=205f919156" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css?v=f8ae87a63d" />
 
 	<link rel="canonical" href="https://ajith.io/https-engineering-qubecinema-com-2019-05-13-go-routing-package-html/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
@@ -135,8 +135,8 @@
 .gh-post-upgrade-cta a.gh-btn:hover {
     opacity: 0.92;
 }</style>
-    <script defer src="/public/cards.min.js?v=205f919156"></script><style>:root {--ghost-accent-color: #ff1a75;}</style>
-    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=205f919156">
+    <script defer src="/public/cards.min.js?v=f8ae87a63d"></script><style>:root {--ghost-accent-color: #ff1a75;}</style>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=f8ae87a63d">
 
 	<style>
 		.profile-img {
@@ -175,6 +175,7 @@
 		}
 	</style>
 
+	
 </head>
 
 <body class="post-template tag-go tag-linux-networking">
@@ -212,6 +213,7 @@
 		<li class="nav-blog" role="presentation"><a href="/"><span>Blog</span></a></li>
 		<li class="nav-talks" role="presentation"><a href="/talks/"><span>Talks</span></a></li>
 		<li class="nav-about-me" role="presentation"><a href="/about/"><span>About Me</span></a></li>
+		<li class="nav-gallery" role="presentation"><a href="/gallery/"><span>Gallery</span></a></li>
 </ul>
 
 
@@ -417,9 +419,26 @@ func exe_cmd(cmd string, wg *sync.WaitGroup) {
 
 	</section>
 
-	<script type="text/javascript" src="/assets/js/script.js?v=205f919156"></script>
+	<script type="text/javascript" src="/assets/js/script.js?v=f8ae87a63d"></script>
 
-	
+	<script async src="{{asset 'fslightbox.js'}}"></script>
+
+<script>
+const images = document.querySelectorAll('.kg-image-card img, .kg-gallery-card img');
+
+// Lightbox function
+images.forEach(function (image) {
+  var wrapper = document.createElement('a');
+  wrapper.setAttribute('data-no-swup', '');
+  wrapper.setAttribute('data-fslightbox', '');
+  wrapper.setAttribute('href', image.src);
+  wrapper.setAttribute('aria-label', 'Click for Lightbox');
+  image.parentNode.insertBefore(wrapper, image.parentNode.firstChild);
+  wrapper.appendChild(image);
+});
+
+refreshFsLightbox();
+</script>
 
 </body>
 
